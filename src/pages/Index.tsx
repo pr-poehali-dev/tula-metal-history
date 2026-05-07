@@ -3,117 +3,159 @@ const FLOOR_PLAN_URL = "https://cdn.poehali.dev/projects/b27fb85c-79e3-4751-a2e4
 export default function Index() {
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-6 sm:p-10"
-      style={{
-        background: "#1a1208",
-        backgroundImage: `radial-gradient(ellipse at 50% 0%, rgba(200,136,58,0.07) 0%, transparent 70%)`,
-      }}
+      className="min-h-screen w-full relative flex items-center justify-center"
+      style={{ background: "#0d0905", overflow: "hidden" }}
     >
-      {/* Outer decorative frame */}
-      <div
-        className="w-full max-w-5xl"
-        style={{
-          border: "1px solid rgba(200,136,58,0.5)",
-          boxShadow: "0 0 0 6px rgba(200,136,58,0.07), 0 0 0 7px rgba(200,136,58,0.2), 0 20px 60px rgba(0,0,0,0.7)",
-          padding: "2px",
-        }}
-      >
-        <div
+      {/* === ФОНОВЫЙ СЛОЙ: картинка на весь экран === */}
+      <div className="absolute inset-0">
+        <img
+          src={FLOOR_PLAN_URL}
+          alt="План подвальных помещений"
           style={{
-            border: "1px solid rgba(200,136,58,0.25)",
-            padding: "clamp(16px, 4vw, 48px)",
-            background: "linear-gradient(160deg, #1e1609 0%, #150f06 100%)",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+            filter: "sepia(0.55) contrast(1.1) brightness(0.75) saturate(0.8)",
+          }}
+        />
+      </div>
+
+      {/* === СЛОЙ 1: пергаментная текстура === */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E")
+          `,
+          mixBlendMode: "multiply",
+          opacity: 0.6,
+        }}
+      />
+
+      {/* === СЛОЙ 2: виньетка по краям === */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(6,4,2,0.65) 75%, rgba(3,2,1,0.92) 100%)
+          `,
+        }}
+      />
+
+      {/* === СЛОЙ 3: тонировка сепия-золото === */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: "linear-gradient(160deg, rgba(120,80,20,0.18) 0%, rgba(60,35,8,0.32) 60%, rgba(20,12,4,0.45) 100%)",
+          mixBlendMode: "multiply",
+        }}
+      />
+
+      {/* === СЛОЙ 4: горизонтальные царапины === */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(0,0,0,0.03) 3px,
+            rgba(0,0,0,0.03) 4px
+          )`,
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* === НАДПИСЬ ПОВЕРХ === */}
+      <div
+        className="relative z-10 text-center px-6 w-full"
+        style={{ pointerEvents: "none" }}
+      >
+        {/* Верхняя декоративная полоса */}
+        <div className="flex items-center justify-center gap-4 mb-6">
+          <div
+            className="h-px flex-1 max-w-xs"
+            style={{ background: "linear-gradient(to right, transparent, rgba(220,170,80,0.7))" }}
+          />
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="4" stroke="rgba(220,170,80,0.8)" strokeWidth="0.8"/>
+            <line x1="12" y1="0" x2="12" y2="7" stroke="rgba(220,170,80,0.8)" strokeWidth="0.8"/>
+            <line x1="12" y1="17" x2="12" y2="24" stroke="rgba(220,170,80,0.8)" strokeWidth="0.8"/>
+            <line x1="0" y1="12" x2="7" y2="12" stroke="rgba(220,170,80,0.8)" strokeWidth="0.8"/>
+            <line x1="17" y1="12" x2="24" y2="12" stroke="rgba(220,170,80,0.8)" strokeWidth="0.8"/>
+          </svg>
+          <div
+            className="h-px flex-1 max-w-xs"
+            style={{ background: "linear-gradient(to left, transparent, rgba(220,170,80,0.7))" }}
+          />
+        </div>
+
+        <p
+          className="font-oswald text-xs tracking-[0.55em] uppercase mb-3"
+          style={{ color: "rgba(200,150,60,0.75)", letterSpacing: "0.5em" }}
+        >
+          Тула · XVII–XVIII вв.
+        </p>
+
+        <h1
+          className="font-cormorant font-bold mb-2"
+          style={{
+            fontSize: "clamp(2rem, 6vw, 4.5rem)",
+            color: "rgba(245,225,170,0.92)",
+            textShadow: "0 2px 40px rgba(180,120,30,0.5), 0 0 80px rgba(100,60,10,0.4)",
+            letterSpacing: "0.06em",
+            lineHeight: 1.1,
           }}
         >
+          НИКИТА ДЕМИДОВ
+        </h1>
 
-          {/* Header */}
-          <div className="text-center mb-6">
-            {/* Top ornament */}
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <div className="h-px flex-1" style={{ background: "linear-gradient(to right, transparent, rgba(200,136,58,0.6))" }} />
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                <circle cx="14" cy="14" r="5" fill="none" stroke="#c8883a" strokeWidth="1"/>
-                <line x1="14" y1="0" x2="14" y2="8" stroke="#c8883a" strokeWidth="1"/>
-                <line x1="14" y1="20" x2="14" y2="28" stroke="#c8883a" strokeWidth="1"/>
-                <line x1="0" y1="14" x2="8" y2="14" stroke="#c8883a" strokeWidth="1"/>
-                <line x1="20" y1="14" x2="28" y2="14" stroke="#c8883a" strokeWidth="1"/>
-                <line x1="4" y1="4" x2="9.5" y2="9.5" stroke="#c8883a" strokeWidth="0.7"/>
-                <line x1="18.5" y1="18.5" x2="24" y2="24" stroke="#c8883a" strokeWidth="0.7"/>
-                <line x1="24" y1="4" x2="18.5" y2="9.5" stroke="#c8883a" strokeWidth="0.7"/>
-                <line x1="9.5" y1="18.5" x2="4" y2="24" stroke="#c8883a" strokeWidth="0.7"/>
-              </svg>
-              <div className="h-px flex-1" style={{ background: "linear-gradient(to left, transparent, rgba(200,136,58,0.6))" }} />
-            </div>
+        <p
+          className="font-fell italic"
+          style={{
+            fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+            color: "rgba(190,145,70,0.7)",
+            textShadow: "0 1px 12px rgba(100,60,10,0.5)",
+          }}
+        >
+          План подвальных помещений экспозиции
+        </p>
 
-            <p
-              className="font-oswald text-xs tracking-[0.5em] uppercase mb-2"
-              style={{ color: "#8a6830" }}
-            >
-              Музей · Тула
-            </p>
-            <h1
-              className="font-cormorant font-bold"
-              style={{
-                fontSize: "clamp(1.6rem, 5vw, 3rem)",
-                color: "#f0ddb0",
-                letterSpacing: "0.05em",
-                textShadow: "0 2px 20px rgba(200,136,58,0.2)",
-              }}
-            >
-              План подвальных помещений
-            </h1>
-            <p
-              className="font-fell italic mt-1"
-              style={{ color: "#7a6040", fontSize: "1rem" }}
-            >
-              Экспозиция, посвящённая Никите Демидову
-            </p>
-
-            {/* Bottom ornament */}
-            <div className="flex items-center justify-center gap-3 mt-5">
-              <div className="h-px flex-1" style={{ background: "linear-gradient(to right, transparent, rgba(200,136,58,0.3))" }} />
-              <span style={{ color: "rgba(200,136,58,0.5)", fontSize: "18px" }}>✦</span>
-              <div className="h-px flex-1" style={{ background: "linear-gradient(to left, transparent, rgba(200,136,58,0.3))" }} />
-            </div>
-          </div>
-
-          {/* Floor plan image */}
+        {/* Нижняя полоса */}
+        <div className="flex items-center justify-center gap-4 mt-6">
           <div
-            style={{
-              border: "1px solid rgba(200,136,58,0.35)",
-              padding: "10px",
-              background: "#f7edd8",
-              boxShadow: "inset 0 0 30px rgba(180,130,60,0.15), 0 8px 32px rgba(0,0,0,0.5)",
-            }}
-          >
-            <img
-              src={FLOOR_PLAN_URL}
-              alt="План подвальных помещений"
-              style={{
-                width: "100%",
-                display: "block",
-                filter: "sepia(0.18) contrast(1.05) brightness(0.97)",
-              }}
-            />
-          </div>
-
-          {/* Footer caption */}
-          <div className="text-center mt-6">
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <div className="h-px w-16" style={{ background: "linear-gradient(to right, transparent, rgba(200,136,58,0.4))" }} />
-              <span style={{ color: "rgba(200,136,58,0.4)", fontSize: "14px" }}>✦</span>
-              <div className="h-px w-16" style={{ background: "linear-gradient(to left, transparent, rgba(200,136,58,0.4))" }} />
-            </div>
-            <p
-              className="font-fell italic text-sm"
-              style={{ color: "#5a4428" }}
-            >
-              Никита Демидович Демидов · 1656 — 1725
-            </p>
-          </div>
-
+            className="h-px flex-1 max-w-xs"
+            style={{ background: "linear-gradient(to right, transparent, rgba(180,120,40,0.5))" }}
+          />
+          <span style={{ color: "rgba(180,120,40,0.6)", fontSize: "16px" }}>✦</span>
+          <div
+            className="h-px flex-1 max-w-xs"
+            style={{ background: "linear-gradient(to left, transparent, rgba(180,120,40,0.5))" }}
+          />
         </div>
       </div>
+
+      {/* === УГОЛКИ-РАМКА === */}
+      {[
+        { top: 20, left: 20, rotate: 0 },
+        { top: 20, right: 20, rotate: 90 },
+        { bottom: 20, right: 20, rotate: 180 },
+        { bottom: 20, left: 20, rotate: 270 },
+      ].map((pos, i) => (
+        <div
+          key={i}
+          className="absolute"
+          style={{
+            ...pos,
+            width: 40,
+            height: 40,
+            borderTop: "1px solid rgba(200,150,60,0.5)",
+            borderLeft: "1px solid rgba(200,150,60,0.5)",
+            transform: `rotate(${pos.rotate}deg)`,
+          }}
+        />
+      ))}
     </div>
   );
 }
